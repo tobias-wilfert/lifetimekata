@@ -53,9 +53,6 @@ pub fn only_if_greater<'a, 'b>(number: &'a i32, greater_than: &'b i32) -> Option
     }
 }
 
-/// In this case, we know that if the option is `Some`, it will
-/// always contain a reference to `number`.
-///
 /// Recall that this function returns a vector of slices of
 /// `text`, split by `delimiter`.
 ///
