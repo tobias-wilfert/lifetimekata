@@ -15,6 +15,44 @@ pub fn identity(number: &i32) -> &i32 {
     number
 }
 
+/// Recall that this function returns `Some(&number)` if
+/// number is greater than the other number; otherwise `None`.
+///
+/// In this case, we know that if the option is `Some`, it will
+/// always contain a reference to `number`.
+///
+/// The following test case will likely always work:
+/// ```rust
+/// use ex02::only_if_greater;
+/// let num = 10;
+/// {
+///     let greater_than = 7;
+///     assert_eq!(Some(&num), only_if_greater(&num, &greater_than))
+/// }
+/// ````
+///
+/// But this test case will only work if you've written the
+/// lifetimes correctly:
+///
+/// ```rust
+/// use ex02::only_if_greater;
+/// let num = 4;
+/// let answer = {
+///     let greater_than = 7;
+///     only_if_greater(&num, &greater_than)
+///     // greater_than is dropped here.
+/// };
+/// assert_eq!(None, answer);
+/// ````
+#[require_lifetimes(!)]
+pub fn only_if_greater(number: &i32, greater_than: &i32) -> Option<&i32> {
+    if number > greater_than {
+        Some(number)
+    } else {
+        None
+    }
+}
+
 /// In this case, we know that if the option is `Some`, it will
 /// always contain a reference to `number`.
 ///
